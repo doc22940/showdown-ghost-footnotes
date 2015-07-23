@@ -17,9 +17,8 @@
     "url": "https://github.com/tivie/showdown-footnotes.git",
     "web": "https://github.com/tivie/showdown-footnotes"
   },
-  "main": ["dist/showdown-footnotes.js"],
+  "main": ["src/showdown-footnotes.js"],
   "ignore": [
-    "src/",
     "test/",
     ".editorconfig",
     ".gitignore",
