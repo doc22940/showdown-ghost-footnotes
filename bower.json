@@ -1,0 +1,31 @@
+{
+  "name": "showdown-footnotes",
+  "description": "Add footnotes support to showdown",
+  "homepage": "https://github.com/tivie/showdown-footnotes",
+  "license": "MIT",
+  "authors": [
+    "Estevão Soares dos Santos (https://github.com/tivie)"
+  ],
+  "keywords": [
+    "markdown",
+    "showdown",
+    "showdown extension",
+    "footnotes"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tivie/showdown-footnotes.git",
+    "web": "https://github.com/tivie/showdown-footnotes"
+  },
+  "main": ["dist/showdown-footnotes.js"],
+  "ignore": [
+    "src/",
+    "test/",
+    ".editorconfig",
+    ".gitignore",
+    ".jscs.json",
+    ".jshintrc",
+    ".travis.yml",
+    "Gruntfile.js"
+  ]
+}
