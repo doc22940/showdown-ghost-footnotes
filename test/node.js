@@ -5,13 +5,11 @@
   'use strict';
 
   require('chai').should();
-  var showdown = require('showdown');
-  global.showdown = showdown;
-  require('../src/showdown-footnotes.js');
-  var beautify = require('js-beautify').html_beautify;
-
-  var fs = require('fs'),
-      converter = new showdown.Converter({extensions: ['footnotes']}),
+  var showdown = require('showdown'),
+      footnotes = require('../src/showdown-footnotes.js'),
+      beautify = require('js-beautify').html_beautify,
+      fs = require('fs'),
+      converter = new showdown.Converter({extensions: [footnotes]}),
       cases = fs.readdirSync('test/cases/')
           .filter(filter())
           .map(map('test/cases/')),
