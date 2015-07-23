@@ -1,2 +1,3 @@
-# showdown-footnotes
-Adds footnotes support to showdown
+# Showdown Footnotes Extension
+
+Add support for footnotes syntax in showdown
