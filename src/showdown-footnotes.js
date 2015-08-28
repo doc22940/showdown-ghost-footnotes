@@ -183,7 +183,7 @@
 
       // parse footnotes md
       var ct = footnotes[i].content.replace(/^ {0,3}/gm, '').trim();
-      ct = converter.makeHtml(ct + '\n' + anchor);
+      ct = converter.makeHtml(ct + '\n' + anchor.replace(/%1/g, n.toString()));
 
       // replace them in footer
       tpl += footerLi.replace(/%1/g, n.toString()).replace('%2', ct) + '\n';
