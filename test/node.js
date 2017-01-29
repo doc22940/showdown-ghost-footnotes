@@ -6,7 +6,7 @@
 
   require('chai').should();
   var showdown = require('showdown'),
-      footnotes = require('../src/showdown-footnotes.js'),
+      footnotes = require('../src/showdown-ghost-footnotes.js'),
       beautify = require('js-beautify').html_beautify,
       fs = require('fs'),
       converter = new showdown.Converter({extensions: [footnotes]}),

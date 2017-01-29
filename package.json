@@ -1,6 +1,6 @@
 {
   "name": "showdown-ghost-footnotes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Add footnotes support to showdown",
   "keywords": [
     "markdown",
@@ -12,11 +12,11 @@
   ],
   "license": "MIT",
   "author": "Estevão Soares dos Santos",
-  "main": "./src/showdown-footnotes.js",
+  "main": "./src/showdown-ghost-footnotes.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tivie/showdown-footnotes.git",
-    "web": "https://github.com/tivie/showdown-footnotes"
+    "url": "https://github.com/tivie/showdown-ghost-footnotes.git",
+    "web": "https://github.com/tivie/showdown-ghost-footnotes"
   },
   "devDependencies": {
     "chai": "^3.2.0",
