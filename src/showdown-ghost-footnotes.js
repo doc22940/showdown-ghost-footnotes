@@ -86,33 +86,33 @@
     // add sentinel ~0 to emulate \Z
     text += '~0';
 
-    // we will use our own escape character (trema) to prevent clash with showdown main
-    text = text.replace(/¨/g, '¨T');
+    // we will use our own escape character § to prevent clash with showdown main
+    text = text.replace(/§/g, '§T');
 
     // first strip the reference footnotes
     // example:  [^1]: some awesome footnote
     // example2: [^fooobar]: this is valid too
     text = text.replace(/^ {0,3}\[\^(.+?)]:[ \t]?([\s\S]+?)(?=~0|\n {0,2}[\S]|^ {0,3}\[\^(.+?)]:)/gm, function(wholematch, ref, content) {
-      ref = ref.replace(/\$/g, '¨D');
+      ref = ref.replace(/\$/g, '§D');
       footRefs[ref] = {
         content: content,
         wMatch:  wholematch
       };
       // we return a marker so we can bail with orphaned references
-      return '¨F¨R¨S' + ref + '¨F¨R¨E';
+      return '§F§R§S' + ref + '§F§R§E';
     });
 
 
     // Search for footnote markers
     text = text.replace(/\[\^(.+?)]/g, function(wholematch, ref) {
       //escape dollar signs (magic in regex)
-      ref = ref.replace(/\$/g, '¨D');
+      ref = ref.replace(/\$/g, '§D');
 
       footMarkers.push(ref);
-      // we now return only the ref, but double escaped with "¨F¨M" to prevent it being
+      // we now return only the ref, but double escaped with "§F§M" to prevent it being
       // parsed as a link in case of something like this:
       // [^1] (http://some.url.that.is.inside.parenthesis.com)
-      return "¨F¨M¨S" + ref + "¨F¨M¨E";
+      return "§F§M§S" + ref + "§F§M§E";
     });
 
     // Now we need to match the footnote markers with footnote references
@@ -135,18 +135,18 @@
     // put back unused foot references
     for (var uRef in footRefs) {
       if (footRefs.hasOwnProperty(uRef)) {
-        text = text.replace(new RegExp('¨F¨R¨S' + uRef + '¨F¨R¨E', 'g'), footRefs[uRef].wMatch);
+        text = text.replace(new RegExp('§F§R§S' + uRef + '§F§R§E', 'g'), footRefs[uRef].wMatch);
       }
     }
 
     // Put back the unused markers
     for (var y = 0; y < orphanedRefs.length; ++y) {
-      var oRef = orphanedRefs[y].replace(/¨D/g, '$');
-      text = text.replace(new RegExp('¨F¨M¨S' + oRef + '¨F¨M¨E', 'g'), '[^' + oRef + ']');
+      var oRef = orphanedRefs[y].replace(/§D/g, '$');
+      text = text.replace(new RegExp('§F§M§S' + oRef + '§F§M§E', 'g'), '[^' + oRef + ']');
     }
 
     // lastly we strip the footnote tokens
-    text = text.replace(/¨F¨R¨S(.+?)¨F¨R¨E/g, '');
+    text = text.replace(/§F§R§S(.+?)§F§R§E/g, '');
 
     // and remove the sentinel
     text = text.replace(/~0/, '');
@@ -179,7 +179,7 @@
           mk = markSup.replace(/%1/g, n.toString());
 
       // replace markers with markup
-      text = text.replace('¨F¨M¨S' + ref + '¨F¨M¨E', mk);
+      text = text.replace('§F§M§S' + ref + '§F§M§E', mk);
 
       // parse footnotes md
       var ct = footnotes[i].content.replace(/^ {0,3}/gm, '').trim();
@@ -194,8 +194,8 @@
     tpl += '</ol>\n';
     tpl += '</div>\n';
 
-    // lastly we unescape trema
-    text = text.replace(/¨T/g, '¨');
+    // lastly we unescape §
+    text = text.replace(/§T/g, '§');
 
     // Add footnotes to the end of file and return
     return text + '\n' + tpl;
