@@ -5,4 +5,3 @@
 [foo][google]
 
 [google]: http://www.google.com
-
