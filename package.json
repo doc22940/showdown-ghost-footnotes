@@ -1,6 +1,6 @@
 {
   "name": "showdown-ghost-footnotes",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Add footnotes support to showdown in ghost",
   "keywords": [
     "markdown",
