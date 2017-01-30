@@ -55,6 +55,18 @@
    *     That's the second paragraph.
    *
    *
+   * INLINE FOOTNOTES
+   *
+   * For consistency with links, footnotes can be added inline ^4:
+   *
+   *     I met Jim [^jim](My old college roommate) at the station.
+   *
+   * Inline notes will work even without the identifier:
+   *
+   *     I met Jim [^](My old college roommate) at the station.
+   *
+   * Inline footnotes, however, cannot have blocks or even multiple line text.
+   *
    * Reading material:
    *
    *  - http://search.gmane.org/?query=footnote&author=&group=gmane.text.markdown.general&sort=relevance&DEFAULTOP=and&xP=Zfootnot&xFILTERS=Gtext.markdown.general---A
@@ -70,6 +82,13 @@
       anchor   = '<a href="#fnref-%1" class="footnote-backref" title="return to article">&#8617;</a>';
 
 
+  function makeRef() {
+    var ref = '',
+        possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    for( var i=0; i < 10; i++ )
+      ref += possible.charAt(Math.floor(Math.random() * possible.length));
+    return ref;
+  }
 
   function tokenizeFootnotes(text, converter, options) {
     // block execution of this extension a second time
@@ -102,6 +121,26 @@
       return '§F§R§S' + ref + '§F§R§E';
     });
 
+
+    // now we look for inline footnotes
+    text = text.replace(/\[\^(.*?)]\((.*?)\)/g, function (wholematch, ref, content) {
+      if (!ref) {
+        ref = makeRef();
+      }
+      //escape dollar signs (magic in regex)
+      ref = ref.replace(/\$/g, '§D');
+
+      // add reference and text to refs Array
+      footRefs[ref] = {
+        content: content,
+        wMatch:  wholematch
+      };
+
+      // and add marker to footMarkers array
+      footMarkers.push(ref);
+
+      return "§F§M§S" + ref + "§F§M§E";
+    });
 
     // Search for footnote markers
     text = text.replace(/\[\^(.+?)]/g, function(wholematch, ref) {
