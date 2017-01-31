@@ -9,7 +9,8 @@
   "keywords": [
     "markdown",
     "showdown",
-    "showdown extension",
+    "showdown",
+    "extension",
     "footnotes"
   ],
   "repository": {
@@ -17,7 +18,9 @@
     "url": "https://github.com/tivie/showdown-ghost-footnotes.git",
     "web": "https://github.com/tivie/showdown-ghost-footnotes"
   },
-  "main": ["src/showdown-ghost-footnotes.js"],
+  "main": [
+    "dist/showdown-ghost-footnotes.js"
+  ],
   "ignore": [
     "test/",
     ".editorconfig",
@@ -25,6 +28,11 @@
     ".jscs.json",
     ".jshintrc",
     ".travis.yml",
-    "Gruntfile.js"
+    "Gruntfile.js",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
   ]
 }
