@@ -1,4 +1,4 @@
-;/*! showdown-ghost-footnotes 31-01-2017/**
+;/*! showdown-ghost-footnotes 25-04-2017/**
  * Created by Estevao on 15-07-2015.
  */
 // Extension loading compatible with AMD and CommonJs
@@ -111,8 +111,16 @@
     // first strip the reference footnotes
     // example:  [^1]: some awesome footnote
     // example2: [^fooobar]: this is valid too
+
+    // counter for [^n] syntax
+    var nCount = 0;
+
     text = text.replace(/^ {0,3}\[\^(.+?)]:[ \t]?([\s\S]+?)(?=~0|\n {0,2}[\S]|^ {0,3}\[\^(.+?)]:)/gm, function(wholematch, ref, content) {
       ref = ref.replace(/\$/g, '§D');
+      // handle ^n syntax
+      if (ref === 'n') {
+        ref = [ref, nCount++].join('-');
+      }
       footRefs[ref] = {
         content: content,
         wMatch:  wholematch
@@ -142,11 +150,17 @@
       return "§F§M§S" + ref + "§F§M§E";
     });
 
+    // reset n count
+    nCount = 0;
     // Search for footnote markers
     text = text.replace(/\[\^(.+?)]/g, function(wholematch, ref) {
       //escape dollar signs (magic in regex)
       ref = ref.replace(/\$/g, '§D');
 
+      // handle ^n syntax
+      if (ref === 'n') {
+        ref = [ref, nCount++].join('-');
+      }
       footMarkers.push(ref);
       // we now return only the ref, but double escaped with "§F§M" to prevent it being
       // parsed as a link in case of something like this:
@@ -251,4 +265,5 @@
     }
   ];
 }));
+
 //# sourceMappingURL=showdown-ghost-footnotes.js.map
