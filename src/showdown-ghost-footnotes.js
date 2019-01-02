@@ -77,9 +77,9 @@
       footMarkers = [],
       orphanedRefs = [];
   //
-  var markSup  = '<sup id="fnref-%1"><a href="#fn-%1" rel="footnote" title="go to footnote">%1</a></sup>',
+  var markSup  = '<sup id="fnref-%1"><a href="#fn-%1" rel="footnote" title="Go to footnote">%1</a></sup>',
       footerLi = '<li id="fn-%1">%2</li>',
-      anchor   = '<a href="#fnref-%1" class="footnote-backref" title="return to article">&#8617;</a>';
+      anchor   = '<a href="#fnref-%1" class="footnote-backref" title="Return to article">&#8617;</a>';
 
 
   function makeRef() {
@@ -219,7 +219,6 @@
     // footer reference
     var tpl =
         '<div class="footnotes">\n' +
-        '<hr>\n' +
         '<ol>\n';
 
     // we don't want the extension to be called recursively so we "disable"
